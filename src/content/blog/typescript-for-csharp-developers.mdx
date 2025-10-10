@@ -1,0 +1,159 @@
+---
+title: "TypeScript for C# Developers"
+description: "A comprehensive guide for C# developers transitioning to TypeScript. Learn the similarities, differences, and how to leverage your C# knowledge."
+date: "2025-10-11"
+tags: ["typescript", "csharp", "tutorial"]
+author: "Tejas M"
+published: true
+---
+
+# TypeScript for C# Developers
+
+If you're a C# developer looking to learn TypeScript, you're in luck! The two languages share many similarities, making the transition smoother than you might think.
+
+## Key Similarities
+
+### 1. Strong Typing
+
+Both languages are strongly typed:
+
+\`\`\`typescript
+// TypeScript
+let name: string = "Tejas";
+let age: number = 25;
+let isActive: boolean = true;
+\`\`\`
+
+\`\`\`csharp
+// C#
+string name = "Tejas";
+int age = 25;
+bool isActive = true;
+\`\`\`
+
+### 2. Interfaces
+
+Interfaces work almost identically:
+
+\`\`\`typescript
+// TypeScript
+interface IPerson {
+  firstName: string;
+  lastName: string;
+  getFullName(): string;
+}
+\`\`\`
+
+\`\`\`csharp
+// C#
+public interface IPerson {
+    string FirstName { get; set; }
+    string LastName { get; set; }
+    string GetFullName();
+}
+\`\`\`
+
+### 3. Classes
+
+Class syntax is very similar:
+
+\`\`\`typescript
+// TypeScript
+class Person implements IPerson {
+  constructor(
+    public firstName: string,
+    public lastName: string
+  ) {}
+
+  getFullName(): string {
+    return \`\${this.firstName} \${this.lastName}\`;
+  }
+}
+\`\`\`
+
+\`\`\`csharp
+// C#
+public class Person : IPerson {
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public Person(string firstName, string lastName) {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
+    public string GetFullName() {
+        return $"{FirstName} {LastName}";
+    }
+}
+\`\`\`
+
+## Key Differences
+
+### 1. Type Declarations
+
+TypeScript uses `: type` after the variable name:
+
+\`\`\`typescript
+// TypeScript
+function add(a: number, b: number): number {
+  return a + b;
+}
+\`\`\`
+
+C# uses type before the variable name:
+
+\`\`\`csharp
+// C#
+public int Add(int a, int b) {
+    return a + b;
+}
+\`\`\`
+
+### 2. Null Handling
+
+TypeScript uses `?` for optional values:
+
+\`\`\`typescript
+// TypeScript
+interface User {
+  name: string;
+  email?: string; // Optional
+}
+
+function getName(user: User | null): string {
+  return user?.name ?? "Unknown";
+}
+\`\`\`
+
+C# has similar but slightly different syntax:
+
+\`\`\`csharp
+// C#
+public class User {
+    public string Name { get; set; }
+    public string? Email { get; set; } // Nullable
+}
+
+public string GetName(User? user) {
+    return user?.Name ?? "Unknown";
+}
+\`\`\`
+
+## Quick Reference Table
+
+| Feature | TypeScript | C# |
+|---------|-----------|-----|
+| Type annotation | `name: string` | `string name` |
+| Optional | `age?: number` | `int? age` |
+| Generics | `Array<T>` or `T[]` | `List<T>` |
+| Async/Await | `async/await` | `async/await` |
+| Lambda | `(x) => x * 2` | `x => x * 2` |
+| Null coalescing | `??` | `??` |
+| Optional chaining | `?.` | `?.` |
+
+## Conclusion
+
+As a C# developer, you already know most of what you need for TypeScript! The concepts are nearly identical - you just need to learn the slightly different syntax.
+
+Happy coding! 🚀
