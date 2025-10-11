@@ -1,32 +1,57 @@
-# SolidStart
+# Tejas M - Personal Website
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+A modern, fast personal website built with SolidJS, showcasing my work in software development, cybersecurity, and cryptography.
 
-## Creating a project
+## Tech Stack
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+- **SolidJS** - Ultra-fast reactive UI framework
+- **SolidStart** - Meta-framework for SolidJS with SSR
+- **UnoCSS** - Instant atomic CSS engine
+- **Vite** - Lightning-fast build tool
+- **TypeScript** - Type-safe development
 
-# create a new project in my-app
-npm init solid@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-## Building
+## Deployment
 
-Solid apps are built with _presets_, which optimise your project for deployment to different environments.
+This project uses GitHub Actions for CI/CD:
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different preset, add it to the `devDependencies` in `package.json` and specify in your `app.config.js`.
+- **CI Workflow**: Runs on every push and pull request, building the project and running tests
+- **Deploy Workflow**: Automatically deploys to GitHub Pages on pushes to main branch
 
-## This project was created with the [Solid CLI](https://github.com/solidjs-community/solid-cli)
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── effects/     # Visual effects (BackgroundEffects, Reveal, GlassCard)
+│   ├── home/        # Homepage components (Hero)
+│   └── layout/      # Layout components (Header, Footer, Container)
+├── lib/             # Utilities and configuration
+├── routes/          # Page routes (index, about, blog, projects)
+└── app.tsx          # Main app component
+```
+
+## Features
+
+- ⚡ Ultra-fast performance with SolidJS
+- 🎨 Beautiful animations and visual effects
+- 🌙 Dark mode support
+- 📱 Responsive design
+- 🔒 Security-focused development
+- 📝 Blog-ready architecture
+- 🚀 GitHub Pages deployment
