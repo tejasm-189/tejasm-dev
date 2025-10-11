@@ -41,6 +41,6 @@ export function Button({ children, variant = 'primary', onClick }: ButtonProps) 
 ### Best Practices
 - ✅ Keep components small and focused
 - ✅ Use TypeScript interfaces for props
-- ✅ Use Tailwind CSS for styling
+- ✅ Use UnoCSS for styling (instant, Tailwind-compatible)
 - ✅ Extract reusable logic into custom hooks
 - ✅ Prefer composition over prop drilling

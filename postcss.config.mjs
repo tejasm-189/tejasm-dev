@@ -1,5 +1,9 @@
+import UnoCSS from '@unocss/postcss';
+
 const config = {
-  plugins: ["@tailwindcss/postcss"],
+  plugins: [
+    UnoCSS(),
+  ],
 };
 
 export default config;
