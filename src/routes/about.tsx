@@ -47,12 +47,12 @@ export default function About() {
               <Reveal delay={300}>
                 <GlassCard class="p-8">
                   <h2 class="text-2xl font-bold mb-4">What I Do</h2>
-                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                  I specialize in building secure web applications and exploring cryptographic concepts. My work focuses on
-                  implementing security best practices, understanding encryption algorithms, and developing applications
-                  that prioritize both functionality and security. I believe in using modern web technologies while
-                  maintaining a strong focus on security principles.
-                </p>
+                  <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                    I specialize in building secure web applications and exploring cryptographic concepts. My work focuses on
+                    implementing security best practices, understanding encryption algorithms, and developing applications
+                    that prioritize both functionality and security. I believe in using modern web technologies while
+                    maintaining a strong focus on security principles.
+                  </p>
                 </GlassCard>
               </Reveal>
 
