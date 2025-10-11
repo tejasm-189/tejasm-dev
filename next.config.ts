@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
+import UnoCSS from '@unocss/webpack';
 
 const nextConfig: NextConfig = {
-  // UnoCSS is configured via PostCSS (see postcss.config.mjs)
+  webpack: (config) => {
+    // Add UnoCSS webpack plugin
+    config.plugins.push(
+      UnoCSS()
+    );
+    
+    // Important: ensure cache is cleared
+    config.cache = false;
+    
+    return config;
+  },
 };
 
 export default nextConfig;

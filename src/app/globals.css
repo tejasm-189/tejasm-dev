@@ -1,7 +1,15 @@
-/* UnoCSS layers - PostCSS will process these */
-@unocss preflights;
-@unocss default;
-@unocss;
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
 
 /* Your custom styles */
 :root {
