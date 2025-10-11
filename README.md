@@ -26,12 +26,46 @@ npm run build
 npm start
 ```
 
+## Testing
+
+This project includes a comprehensive test suite:
+
+```bash
+# Run tests (watch mode)
+npm test
+
+# Run tests once
+npm test -- --run
+
+# Visual test interface
+npm run test:ui
+
+# Generate coverage report
+npm run test:coverage
+```
+
+**Test Coverage:**
+- ✅ 44 tests across unit, component, and integration tests
+- ✅ Utility functions, React components, and workflows
+- 📚 See [TESTING.md](TESTING.md) for complete testing guide
+
 ## Deployment
 
-This project uses GitHub Actions for CI/CD:
+This project uses **GitHub Actions for CI/CD** with automatic deployment to DigitalOcean:
 
-- **CI Workflow**: Runs on every push and pull request, building the project and running tests
-- **Deploy Workflow**: Automatically deploys to GitHub Pages on pushes to main branch
+### Pipeline Stages:
+1. **Test** 🧪 - Runs all tests, generates coverage
+2. **Build** 🏗️ - Compiles production bundle
+3. **Deploy** 🚀 - Deploys to DigitalOcean VM (master branch only)
+
+**Deployment happens automatically** when you push to the `master` branch!
+
+### Quick Setup:
+1. Follow the [SETUP_CHECKLIST.md](SETUP_CHECKLIST.md)
+2. Configure GitHub Secrets (see [CI_CD.md](CI_CD.md))
+3. Push to master - your app deploys automatically!
+
+📚 **Complete CI/CD Documentation**: [CI_CD.md](CI_CD.md)
 
 ## Project Structure
 
