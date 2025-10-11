@@ -1,4 +1,6 @@
 import { createSignal } from "solid-js";
+import "@unocss/reset/tailwind.css";
+import "virtual:uno.css";
 import "./app.css";
 
 export default function App() {
