@@ -66,3 +66,58 @@ html.dark body {
     scroll-behavior: smooth;
   }
 }
+
+/* Background Effects Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-medium {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-fast {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-medium {
+  animation: pulse-medium 10s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-pulse-fast {
+  animation: pulse-fast 12s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* Background Patterns */
+.bg-dots {
+  background-image: radial-gradient(circle, rgba(100, 100, 100, 0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
