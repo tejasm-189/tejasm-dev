@@ -18,31 +18,41 @@ export function Hero() {
         {/* Subtitle */}
         <Reveal delay={100}>
           <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Software Developer passionate about building fast, elegant, and user-friendly applications.
+            Full-stack developer passionate about building secure applications and exploring cryptography.
           </p>
         </Reveal>
 
         {/* Description */}
         <Reveal delay={200}>
           <p class="text-lg text-gray-500 dark:text-gray-500 max-w-3xl mx-auto">
-            Welcome to my personal space on the web where I share my experiences, insights, and learnings
-            from the world of software development.
+            Welcome to my digital space where I share insights on software development, cybersecurity,
+            cryptography, and the intersection of technology with security. Let's build something amazing together.
           </p>
         </Reveal>
 
         {/* CTA Buttons with Hover Effects */}
         <Reveal delay={300}>
-          <div class="flex gap-4 justify-center pt-8">
+          <div class="flex gap-4 justify-center pt-8 flex-wrap">
             <a 
               href="/blog" 
               class="btn-primary transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
+              <div class="i-mdi-post inline-block mr-2" />
               Read My Blog
+            </a>
+            <a 
+              href={siteConfig.links.resume}
+              download="Tejas_M_Resume.pdf"
+              class="btn-primary transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              <div class="i-mdi-download inline-block mr-2" />
+              Download Resume
             </a>
             <a 
               href="/about" 
               class="btn-secondary transform hover:scale-105 active:scale-95 transition-all duration-200"
             >
+              <div class="i-mdi-account inline-block mr-2" />
               About Me
             </a>
           </div>

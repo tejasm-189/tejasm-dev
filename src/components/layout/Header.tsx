@@ -1,5 +1,6 @@
 import { createSignal, onMount } from "solid-js";
 import { Container } from "./Container";
+import { siteConfig } from "~/lib/config";
 
 export function Header() {
   const [isDark, setIsDark] = createSignal(false);
@@ -51,6 +52,14 @@ export function Header() {
             </a>
             <a href="/projects" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               Projects
+            </a>
+            <a 
+              href={siteConfig.links.resume}
+              download="Tejas_M_Resume.pdf"
+              class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1"
+            >
+              <div class="i-mdi-file-document text-sm" />
+              Resume
             </a>
             
             {/* Theme Toggle Button */}

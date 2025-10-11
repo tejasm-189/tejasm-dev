@@ -22,7 +22,7 @@ export default function About() {
             </Reveal>
             <Reveal delay={100}>
               <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
-                Software developer with a passion for building fast and elegant applications.
+                Full-stack developer passionate about building secure applications and exploring cryptography.
               </p>
             </Reveal>
 
@@ -32,13 +32,14 @@ export default function About() {
                 <GlassCard class="p-8">
                   <h2 class="text-2xl font-bold mb-4">Background</h2>
                   <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                  I'm a software developer who loves creating web applications that are not only functional
-                  but also performant and delightful to use. My journey in tech has been driven by curiosity
-                  and a constant desire to learn and improve.
+                  I'm a software developer with a deep interest in cybersecurity and cryptography. My journey in tech
+                  has been driven by curiosity about how systems work and how to make them more secure. I love exploring
+                  the intersection of technology and security, from building secure web applications to understanding
+                  cryptographic algorithms.
                 </p>
                 <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  This website serves as my digital home where I share my thoughts, experiences, and learnings
-                  from the world of software development.
+                  This website serves as my digital space where I share insights on software development, cybersecurity
+                  concepts, cryptography, and the latest trends in secure application development.
                 </p>
                 </GlassCard>
               </Reveal>
@@ -47,8 +48,10 @@ export default function About() {
                 <GlassCard class="p-8">
                   <h2 class="text-2xl font-bold mb-4">What I Do</h2>
                 <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                  I work with modern web technologies to build applications that prioritize performance and user experience.
-                  I believe in using the right tool for the job and staying up-to-date with the latest developments in the industry.
+                  I specialize in building secure web applications and exploring cryptographic concepts. My work focuses on
+                  implementing security best practices, understanding encryption algorithms, and developing applications
+                  that prioritize both functionality and security. I believe in using modern web technologies while
+                  maintaining a strong focus on security principles.
                 </p>
                 </GlassCard>
               </Reveal>
