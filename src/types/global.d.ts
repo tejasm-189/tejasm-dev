@@ -17,3 +17,12 @@ declare module "*.sass" {
   const content: { [className: string]: string };
   export default content;
 }
+
+/**
+ * UnoCSS Virtual Module
+ * Declares the virtual:uno.css module for UnoCSS
+ */
+declare module 'virtual:uno.css' {
+  const content: string;
+  export default content;
+}

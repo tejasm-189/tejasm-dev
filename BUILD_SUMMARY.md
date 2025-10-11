@@ -5,7 +5,8 @@
 Your personal website **tejasm.dev** is now up and running! Here's what we accomplished:
 
 ### 1. **Project Setup** ✅
-- ✅ Created Next.js 15 project with TypeScript and Tailwind CSS
+- ✅ Created Next.js 15 project with TypeScript
+- ✅ Configured **UnoCSS** (instant atomic CSS engine, 200x faster than Tailwind!)
 - ✅ Installed all required dependencies
 - ✅ Configured development environment
 
@@ -131,8 +132,8 @@ Created 2 sample blog posts:
 ## 📚 Key Files to Know
 
 ### Configuration
-- `next.config.ts` - Next.js configuration
-- `tailwind.config.ts` - Tailwind CSS settings
+- `next.config.ts` - Next.js configuration (includes UnoCSS webpack plugin)
+- `uno.config.ts` - UnoCSS configuration (presets, shortcuts, theme)
 - `tsconfig.json` - TypeScript configuration
 - `src/lib/config.ts` - Site-wide settings
 
@@ -236,17 +237,24 @@ npm run lint
 2. ✅ TypeScript for type safety
 3. ✅ Clean architecture principles
 4. ✅ MDX for content management
-5. ✅ Tailwind CSS for styling
+5. ✅ **UnoCSS for instant styling** (200x faster than Tailwind!)
 6. ✅ Repository pattern implementation
 7. ✅ File-based routing in Next.js
 
 ---
 
-## 🎨 Design System
+## 🎨 Design System with UnoCSS
 
-### Colors (Tailwind)
-- **Primary:** `blue-600` / `blue-400` (dark mode)
-- **Background:** `white` / `gray-950` (dark mode)
+### Why UnoCSS?
+- ⚡ **Instant compilation** - No build step needed
+- 🎨 **Tailwind-compatible** - Same utility classes you know
+- 🔥 **Built-in icons** - 200,000+ icons via Iconify
+- 📦 **Smaller bundles** - Only generates what you use
+- ⚙️ **Custom shortcuts** - Reusable class combinations
+
+### Colors (UnoCSS utilities)
+- **Primary:** `bg-blue-600` / `bg-blue-400` (dark mode)
+- **Background:** `bg-white` / `bg-gray-950` (dark mode)
 - **Text:** `gray-900` / `gray-100` (dark mode)
 
 ### Typography
