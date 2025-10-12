@@ -50,6 +50,35 @@ jobs:
         path: coverage/
         retention-days: 30
 
+    - name: 📊 Test Results Summary
+      if: always()
+      run: |
+        echo "### 🧪 Test Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "✅ All tests passed!" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Tests failed!" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Node Version:** ${{ env.NODE_VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+
+    - name: 🔔 Notify test failure
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            state: 'failure',
+            context: '🧪 Tests',
+            description: 'Tests failed - check logs for details'
+          })
+
   # Job 2: Build the application
   build:
     name: Build Application
@@ -86,6 +115,36 @@ jobs:
         name: build-artifact
         path: deploy-package.tar.gz
         retention-days: 7
+
+    - name: 📦 Build Summary
+      if: always()
+      run: |
+        echo "### 🏗️ Build Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "✅ Build successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Artifact Details:**" >> $GITHUB_STEP_SUMMARY
+          ls -lh deploy-package.tar.gz | awk '{print "- Size: " $5}' >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Build failed!" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "- **Node Version:** ${{ env.NODE_VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+
+    - name: 🔔 Notify build failure
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            state: 'failure',
+            context: '🏗️ Build',
+            description: 'Build failed - check logs for details'
+          })
 
   # Job 3: Deploy to DigitalOcean VPS
   deploy:
@@ -150,6 +209,15 @@ jobs:
         port: 22
         envs: APP_NAME,DEPLOY_PATH,NODE_ENV
         script: |
+          # Load NVM if it exists (for non-interactive shells)
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          
+          # Verify Node.js is accessible
+          echo "🔍 Checking Node.js..."
+          node --version || { echo "❌ Node.js not found!"; exit 1; }
+          npm --version || { echo "❌ NPM not found!"; exit 1; }
+          
           cd $DEPLOY_PATH
           
           echo "📦 Extracting deployment package..."
@@ -162,22 +230,34 @@ jobs:
           echo "📥 Installing production dependencies..."
           npm ci --production
           
-          echo "🔄 Restarting application with PM2..."
+          echo "🔄 Managing application with PM2..."
           # Install PM2 globally if not already installed
           command -v pm2 >/dev/null 2>&1 || npm install -g pm2
           
-          # Start or restart the app
-          if pm2 describe $APP_NAME > /dev/null 2>&1; then
-            pm2 restart $APP_NAME --update-env
-          else
-            pm2 start npm --name $APP_NAME -- start
+          # Copy ecosystem config if it exists
+          if [ -f "ecosystem.config.js" ]; then
+            echo "📝 Using ecosystem.config.js..."
+            # Delete existing PM2 process if it exists
+            pm2 delete $APP_NAME 2>/dev/null || true
+            # Start with ecosystem config
+            pm2 start ecosystem.config.js
             pm2 save
+          else
+            echo "📝 Using direct PM2 start..."
+            # Start or restart the app
+            if pm2 describe $APP_NAME > /dev/null 2>&1; then
+              pm2 restart $APP_NAME --update-env
+            else
+              pm2 start npm --name $APP_NAME -- start
+              pm2 save
+            fi
           fi
           
           echo "✅ Deployment successful!"
           pm2 status
+          pm2 logs $APP_NAME --lines 20 --nostream
 
-    - name: Health check
+    - name: 🏥 Health check
       run: |
         echo "🏥 Performing health check..."
         sleep 10
@@ -185,11 +265,100 @@ jobs:
         # curl -f https://tejasm.dev/api/health || exit 1
         echo "✅ Health check passed!"
 
-    - name: Notify deployment status
+    - name: 🚀 Deployment Summary
       if: always()
       run: |
+        echo "### 🚀 Deployment Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
         if [ "${{ job.status }}" == "success" ]; then
-          echo "✅ Deployment completed successfully!"
+          echo "✅ **Deployment Successful!**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **Your site is live at:**" >> $GITHUB_STEP_SUMMARY
+          echo "- http://tejasm.dev" >> $GITHUB_STEP_SUMMARY
+          echo "- http://www.tejasm.dev" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 **Deployment Details:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Server: ${{ secrets.SERVER_HOST }}" >> $GITHUB_STEP_SUMMARY
+          echo "- User: ${{ secrets.SERVER_USER }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Path: ${{ env.DEPLOY_PATH }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
         else
-          echo "❌ Deployment failed!"
+          echo "❌ **Deployment Failed!**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Please check the logs above for error details." >> $GITHUB_STEP_SUMMARY
         fi
+
+    - name: 🔔 Notify deployment success
+      if: success()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            state: 'success',
+            context: '🚀 Deployment',
+            description: 'Deployed successfully to production',
+            target_url: 'http://tejasm.dev'
+          })
+
+    - name: 🔔 Notify deployment failure
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.repos.createCommitStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            state: 'failure',
+            context: '🚀 Deployment',
+            description: 'Deployment failed - check logs for details'
+          })
+
+    - name: 📧 Create deployment comment
+      if: always() && github.event_name == 'push'
+      uses: actions/github-script@v7
+      env:
+        TEST_RESULT: ${{ needs.test.result }}
+        BUILD_RESULT: ${{ needs.build.result }}
+        DEPLOY_STATUS: ${{ job.status }}
+      with:
+        script: |
+          const testResult = process.env.TEST_RESULT || 'unknown';
+          const buildResult = process.env.BUILD_RESULT || 'unknown';
+          const deployStatus = process.env.DEPLOY_STATUS || 'unknown';
+          const status = deployStatus === 'success' ? '✅ Success' : '❌ Failed';
+          const emoji = deployStatus === 'success' ? '🚀' : '❌';
+          const message = `${emoji} **Deployment ${status}**
+          
+          **Pipeline Summary:**
+          - 🧪 Tests: ${testResult}
+          - 🏗️ Build: ${buildResult}
+          - 🚀 Deploy: ${deployStatus}
+          
+          **Details:**
+          - Commit: \`${context.sha.substring(0, 7)}\`
+          - Branch: \`${context.ref.replace('refs/heads/', '')}\`
+          - Triggered by: @${context.actor}
+          - Workflow: [View logs](${context.payload.repository.html_url}/actions/runs/${context.runId})
+          ${deployStatus === 'success' ? `\n🌐 **Live at:** http://tejasm.dev` : ''}
+          `;
+          
+          // Find recent commits to comment on
+          const commits = await github.rest.repos.listCommits({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: context.sha,
+            per_page: 1
+          });
+          
+          if (commits.data.length > 0) {
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: message
+            });
+          }
