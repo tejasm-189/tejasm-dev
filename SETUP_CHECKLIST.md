@@ -27,6 +27,12 @@ Complete this checklist to get your CI/CD pipeline running!
 - [ ] Get certificate: `sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com`
 - [ ] Verify auto-renewal: `sudo systemctl status certbot.timer`
 
+### 5. Environment Variables Setup
+- [ ] Create production `.env` file: `nano /var/www/tejasm-dev/current/.env`
+- [ ] Add required variables (see `.env.example` or `ENV_SETUP.md`)
+- [ ] Set secure permissions: `chmod 600 .env`
+- [ ] Verify variables are loaded after PM2 restart
+
 ## GitHub Configuration
 
 ### 5. Repository Secrets
