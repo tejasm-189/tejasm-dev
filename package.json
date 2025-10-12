@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@solidjs/meta": "^0.29.4",
@@ -17,7 +20,15 @@
     "node": ">=22"
   },
   "devDependencies": {
+    "@solidjs/testing-library": "^0.8.10",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.7.2",
     "@unocss/reset": "^66.5.3",
-    "unocss": "^66.5.3"
+    "@vitest/ui": "^3.2.4",
+    "jsdom": "^27.0.0",
+    "unocss": "^66.5.3",
+    "vite-plugin-solid": "^2.11.9",
+    "vitest": "^3.2.4"
   }
 }
