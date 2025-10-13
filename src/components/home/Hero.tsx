@@ -68,31 +68,6 @@ export function Hero() {
           </div>
         </Reveal>
 
-        {/* Social Links with Enhanced Animations */}
-        <Reveal delay={400}>
-          <div class="flex gap-6 justify-center pt-12">
-            <a 
-              href={siteConfig.links.github} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="group relative flex items-center justify-center w-14 h-14 text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:border-blue-500 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400"
-              aria-label="GitHub"
-            >
-              <div class="i-mdi-github text-2xl group-hover:rotate-12 transition-transform duration-300" />
-              <span class="absolute -bottom-8 opacity-0 group-hover:opacity-100 text-xs font-medium transition-opacity duration-300">GitHub</span>
-            </a>
-            <a 
-              href={siteConfig.links.linkedin} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="group relative flex items-center justify-center w-14 h-14 text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:border-blue-600 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-500"
-              aria-label="LinkedIn"
-            >
-              <div class="i-mdi-linkedin text-2xl group-hover:rotate-12 transition-transform duration-300" />
-              <span class="absolute -bottom-8 opacity-0 group-hover:opacity-100 text-xs font-medium transition-opacity duration-300">LinkedIn</span>
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
