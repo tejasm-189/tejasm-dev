@@ -62,7 +62,7 @@ export function Header() {
       
       {/* Header */}
       <header class="sticky top-0 z-50 w-full px-4 py-2">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-center lg:justify-between gap-4">
           {/* Left side - Location */}
           <div class="flex-1 hidden lg:flex items-center text-xs text-gray-500 dark:text-gray-500">
             <div class="i-mdi-map-marker mr-1 text-sm" />
