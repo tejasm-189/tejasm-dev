@@ -75,40 +75,7 @@ describe('Hero Component', () => {
     expect(resumeButton).toHaveAttribute('download', 'Tejas_M_Resume.pdf');
   });
 
-  it('should render social media links', () => {
-    render(() => <Hero />);
-    
-    // Find social links by aria-label
-    const githubLink = screen.getByLabelText(/GitHub/i);
-    const linkedinLink = screen.getByLabelText(/LinkedIn/i);
-    
-    expect(githubLink).toBeInTheDocument();
-    expect(linkedinLink).toBeInTheDocument();
-  });
-
-  it('should have correct social media link URLs', () => {
-    render(() => <Hero />);
-    
-    const githubLink = screen.getByLabelText(/GitHub/i);
-    const linkedinLink = screen.getByLabelText(/LinkedIn/i);
-    
-    expect(githubLink).toHaveAttribute('href', 'https://github.com/tejasm-189');
-    expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/tejas-m-65656b281/');
-  });
-
-  it('should have external links open in new tab with security attributes', () => {
-    render(() => <Hero />);
-    
-    const githubLink = screen.getByLabelText(/GitHub/i);
-    const linkedinLink = screen.getByLabelText(/LinkedIn/i);
-    
-    // Check for target="_blank" and rel="noopener noreferrer" for security
-    expect(githubLink).toHaveAttribute('target', '_blank');
-    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
-    
-    expect(linkedinLink).toHaveAttribute('target', '_blank');
-    expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
-  });
+  // Note: Social media links have been moved to the About page
 
   it('should display the welcome description', () => {
     render(() => <Hero />);
