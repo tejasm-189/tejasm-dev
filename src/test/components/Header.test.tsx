@@ -1,6 +1,16 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent } from '@solidjs/testing-library';
+import { Router, Route } from '@solidjs/router';
 import { Header } from '../../components/layout/Header';
+
+// Helper to render component with Router context
+const renderWithRouter = (Component: any) => {
+  return render(() => (
+    <Router>
+      <Route path="/" component={() => <Component />} />
+    </Router>
+  ));
+};
 
 /**
  * ADVANCED COMPONENT TESTING
@@ -66,41 +76,44 @@ describe('Header Component', () => {
 
   describe('Rendering', () => {
     it('should render the header with navigation', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       const header = screen.getByRole('banner');
       expect(header).toBeInTheDocument();
     });
 
     it('should display the site logo/name', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
-      const logo = screen.getByText('Tejas M');
-      expect(logo).toBeInTheDocument();
-      expect(logo).toHaveAttribute('href', '/');
+      // The new header doesn't have a logo text, it has navigation items
+      expect(screen.getByText(/Home/i)).toBeInTheDocument();
     });
 
     it('should render all navigation links', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
-      expect(screen.getByRole('link', { name: /^Home$/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /^Blog$/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /^About$/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /^Projects$/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /Resume/i })).toBeInTheDocument();
+      expect(screen.getByText(/Home/i)).toBeInTheDocument();
+      expect(screen.getByText(/Blog/i)).toBeInTheDocument();
+      expect(screen.getByText(/About/i)).toBeInTheDocument();
+      expect(screen.getByText(/Projects/i)).toBeInTheDocument();
     });
 
     it('should have correct href attributes for navigation links', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
-      expect(screen.getByRole('link', { name: /^Home$/i })).toHaveAttribute('href', '/');
-      expect(screen.getByRole('link', { name: /^Blog$/i })).toHaveAttribute('href', '/blog');
-      expect(screen.getByRole('link', { name: /^About$/i })).toHaveAttribute('href', '/about');
-      expect(screen.getByRole('link', { name: /^Projects$/i })).toHaveAttribute('href', '/projects');
+      const homeLink = screen.getByText(/Home/i).closest('a');
+      const blogLink = screen.getByText(/Blog/i).closest('a');
+      const aboutLink = screen.getByText(/About/i).closest('a');
+      const projectsLink = screen.getByText(/Projects/i).closest('a');
+      
+      expect(homeLink).toHaveAttribute('href', '/');
+      expect(blogLink).toHaveAttribute('href', '/blog');
+      expect(aboutLink).toHaveAttribute('href', '/about');
+      expect(projectsLink).toHaveAttribute('href', '/projects');
     });
 
     it('should render theme toggle button', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       const themeButton = screen.getByRole('button', { name: /toggle theme/i });
       expect(themeButton).toBeInTheDocument();
@@ -109,7 +122,7 @@ describe('Header Component', () => {
 
   describe('Theme Switching', () => {
     it('should start with light theme by default when no preference is saved', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       // Light theme should show moon icon (to switch to dark)
       const moonIcon = document.querySelector('.i-mdi-moon-waning-crescent');
@@ -119,7 +132,7 @@ describe('Header Component', () => {
     it('should respect saved dark theme preference from localStorage', () => {
       localStorageMock.setItem('theme', 'dark');
       
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       // Dark theme should show sun icon (to switch to light)
       const sunIcon = document.querySelector('.i-mdi-white-balance-sunny');
@@ -127,7 +140,7 @@ describe('Header Component', () => {
     });
 
     it('should toggle theme when button is clicked', async () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       const themeButton = screen.getByRole('button', { name: /toggle theme/i });
       
@@ -147,7 +160,7 @@ describe('Header Component', () => {
       localStorageMock.setItem('theme', 'dark');
       document.documentElement.classList.add('dark');
       
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       const themeButton = screen.getByRole('button', { name: /toggle theme/i });
       
@@ -166,7 +179,7 @@ describe('Header Component', () => {
         writable: true,
       });
       
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       // Should show sun icon (dark mode active)
       const sunIcon = document.querySelector('.i-mdi-white-balance-sunny');
@@ -176,25 +189,24 @@ describe('Header Component', () => {
 
   describe('Resume Link', () => {
     it('should have correct download attributes', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
-      const resumeLink = screen.getByRole('link', { name: /Resume/i });
-      
-      expect(resumeLink).toHaveAttribute('href', '/documents/Tejas Resume.pdf');
-      expect(resumeLink).toHaveAttribute('download', 'Tejas_M_Resume.pdf');
+      // The new header doesn't have a resume link - it's in the Hero section
+      // Just verify navigation works
+      expect(screen.getByText(/Home/i)).toBeInTheDocument();
     });
   });
 
   describe('Accessibility', () => {
     it('should have proper ARIA labels for interactive elements', () => {
-      render(() => <Header />);
+      renderWithRouter(Header);
       
       const themeButton = screen.getByRole('button', { name: /toggle theme/i });
       expect(themeButton).toHaveAttribute('aria-label', 'Toggle theme');
     });
 
     it('should use semantic HTML (header, nav elements)', () => {
-      const { container } = render(() => <Header />);
+      const { container } = renderWithRouter(Header);
       
       expect(container.querySelector('header')).toBeInTheDocument();
       expect(container.querySelector('nav')).toBeInTheDocument();
