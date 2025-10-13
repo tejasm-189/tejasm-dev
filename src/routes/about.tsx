@@ -21,10 +21,31 @@ export default function About() {
               </h1>
             </Reveal>
             <Reveal delay={100}>
-              <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">
+              <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
                 Full-stack developer passionate about building secure applications and exploring cryptography.
               </p>
             </Reveal>
+
+            {/* Schedule a Call CTA */}
+            {siteConfig.calendar.display && (
+              <Reveal delay={150}>
+                <a
+                  href={siteConfig.calendar.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group inline-flex items-center gap-2 mb-8 border border-gray-300/50 dark:border-gray-700/50 bg-white/50 dark:bg-gray-900/50 rounded-full px-3 py-2 text-sm transition-all duration-300 hover:border-blue-500/50 dark:hover:border-blue-400/50 hover:bg-blue-500/5 dark:hover:bg-blue-400/5 hover:shadow-md"
+                  style={{ "backdrop-filter": "blur(8px)" }}
+                >
+                  <div class="w-6 h-6 rounded-full bg-blue-500/10 dark:bg-blue-400/10 flex items-center justify-center">
+                    <div class="i-mdi-calendar text-sm text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <span class="font-medium text-gray-700 dark:text-gray-300">
+                    Schedule a call
+                  </span>
+                  <div class="i-mdi-chevron-right text-sm text-gray-500 dark:text-gray-500 group-hover:translate-x-0.5 transition-transform duration-300" />
+                </a>
+              </Reveal>
+            )}
 
             {/* Content Sections */}
             <div class="space-y-12">
