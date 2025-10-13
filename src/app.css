@@ -1,3 +1,6 @@
+/* Import Google Fonts for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 /* Custom styles */
 * {
   box-sizing: border-box;
@@ -5,13 +8,22 @@
 
 html {
   scroll-behavior: smooth;
+  /* Better text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* Inter for body, Space Grotesk for headings (defined in components) */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   padding: 0;
+  /* Better line height for readability */
+  line-height: 1.6;
+  /* Improved letter spacing */
+  letter-spacing: -0.011em;
 }
 
 /* Light mode */
@@ -107,6 +119,50 @@ html.dark body {
 .animate-pulse-fast {
   animation: pulse-fast 12s ease-in-out infinite;
   animation-delay: 4s;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  font-weight: 600;
+}
+
+p {
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.125rem);
+  line-height: 1.7;
+  letter-spacing: -0.011em;
+}
+
+/* Text gradients for emphasis */
+.text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #667eea 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Background Patterns */
