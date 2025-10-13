@@ -74,7 +74,7 @@ export default function Home() {
                     Problem Solving
                   </h3>
                   <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-base">
-                    Tackling complex challenges with creative solutions and innovative approaches using AI to the best.
+                    Tackling complex challenges with creative solutions and innovative approaches, leveraging AI effectively.
                   </p>
                   <div class="mt-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <span class="px-3 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full">Algorithms</span>
