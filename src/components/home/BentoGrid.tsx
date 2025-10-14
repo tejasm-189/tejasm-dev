@@ -1,4 +1,5 @@
 import { createSignal, For, onMount, JSX } from "solid-js";
+import { usePrefersReducedMotion } from "~/lib/usePrefersReducedMotion";
 
 /**
  * BENTO GRID COMPONENT - Section 3 from HOME_PAGE_VISION.md
@@ -27,6 +28,9 @@ interface BentoItem {
 }
 
 export function BentoGrid() {
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   // Data for the bento cards
   const items: BentoItem[] = [
     {
@@ -87,6 +91,10 @@ export function BentoGrid() {
    * This creates a realistic 3D tilt effect based on mouse position.
    * The card rotates on both X and Y axes as if it's a physical object.
    * 
+   * Accessibility: Respects prefers-reduced-motion by skipping the tilt effect.
+   * Note: 3D tilt is considered user-initiated (requires hover), so it's generally
+   * acceptable even with reduced motion, but we simplify it here to be extra cautious.
+   * 
    * How it works:
    * 1. Track mouse position relative to card center
    * 2. Calculate rotation angles based on mouse offset
@@ -94,6 +102,9 @@ export function BentoGrid() {
    * 4. Reset on mouse leave
    */
   const handleMouseMove = (e: MouseEvent, cardRef: HTMLDivElement) => {
+    // Skip 3D tilt if user prefers reduced motion
+    if (prefersReducedMotion()) return;
+
     const card = cardRef;
     const rect = card.getBoundingClientRect();
     
@@ -105,7 +116,7 @@ export function BentoGrid() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    // Calculate rotation angles (limit to ±15 degrees for subtle effect)
+    // Calculate rotation angles (limit to ±10 degrees for subtle effect)
     const rotateX = ((y - centerY) / centerY) * -10; // Negative for natural tilt
     const rotateY = ((x - centerX) / centerX) * 10;
     
@@ -114,6 +125,9 @@ export function BentoGrid() {
   };
 
   const handleMouseLeave = (cardRef: HTMLDivElement) => {
+    // Skip reset if user prefers reduced motion (nothing to reset)
+    if (prefersReducedMotion()) return;
+
     // Reset transform with smooth transition
     cardRef.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
   };

@@ -1,6 +1,7 @@
 import { onMount, onCleanup, createSignal } from "solid-js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePrefersReducedMotion } from "~/lib/usePrefersReducedMotion";
 
 /**
  * SCROLL-TRIGGERED TYPOGRAPHY ANIMATION - Section 4 from HOME_PAGE_VISION.md
@@ -49,6 +50,9 @@ export function ScrollTypography(props: ScrollTypographyProps) {
   let containerRef: HTMLDivElement | undefined;
   let textRef: HTMLHeadingElement | undefined;
   let subtitleRef: HTMLParagraphElement | undefined;
+
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   /**
    * TEXT SPLITTING FUNCTION
@@ -99,6 +103,14 @@ export function ScrollTypography(props: ScrollTypographyProps) {
 
   onMount(() => {
     if (!textRef) return;
+
+    // If user prefers reduced motion, skip all animations and show text immediately
+    if (prefersReducedMotion()) {
+      // Make text visible without animation
+      if (textRef) textRef.style.opacity = "1";
+      if (subtitleRef && props.subtitle) subtitleRef.style.opacity = "1";
+      return;
+    }
 
     // Split text into animatable characters
     const chars = splitTextIntoChars(textRef);

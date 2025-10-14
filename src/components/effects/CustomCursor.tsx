@@ -69,29 +69,30 @@ export function CustomCursor() {
    */
   const EASE_FACTOR = 0.15;
 
-  /**
-   * Initialize trail dots at center of screen
-   */
-  const initializeTrail = () => {
-    const initialTrail: TrailDot[] = [];
-    for (let i = 0; i < TRAIL_LENGTH; i++) {
-      initialTrail.push({
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2,
-        scale: 1 - (i * 0.15), // Each dot slightly smaller
-        opacity: 1 - (i * 0.15) // Each dot slightly more transparent
-      });
-    }
-    setTrail(initialTrail);
-  };
-
   onMount(() => {
     // Check if user prefers reduced motion (accessibility)
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = typeof window !== 'undefined' 
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       // Don't show custom cursor if user prefers reduced motion
       return;
     }
+
+    /**
+     * Initialize trail dots at center of screen
+     */
+    const initializeTrail = () => {
+      const initialTrail: TrailDot[] = [];
+      for (let i = 0; i < TRAIL_LENGTH; i++) {
+        initialTrail.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+          scale: 1 - (i * 0.15), // Each dot slightly smaller
+          opacity: 1 - (i * 0.15) // Each dot slightly more transparent
+        });
+      }
+      setTrail(initialTrail);
+    };
 
     // Initialize trail
     initializeTrail();
@@ -254,11 +255,8 @@ export function CustomCursor() {
           fixed top-0 left-0 pointer-events-none z-9999
           transition-opacity duration-300
           ${isVisible() ? 'opacity-100' : 'opacity-0'}
+          hidden md:block
         `}
-        style={{
-          // Hide on mobile/touch devices
-          display: window.matchMedia('(hover: none) and (pointer: coarse)').matches ? 'none' : 'block'
-        }}
       >
         {/* Trail dots (render behind main cursor) */}
         <For each={trail()}>

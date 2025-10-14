@@ -1,4 +1,5 @@
 import { createSignal, onMount, onCleanup, For } from "solid-js";
+import { usePrefersReducedMotion } from "~/lib/usePrefersReducedMotion";
 
 /**
  * SKILLS CONSTELLATION COMPONENT - Section 7 from HOME_PAGE_VISION.md
@@ -44,6 +45,9 @@ interface Connection {
 }
 
 export function SkillsConstellation() {
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   const [hoveredSkill, setHoveredSkill] = createSignal<string | null>(null);
   const [activeConnections, setActiveConnections] = createSignal<Set<string>>(new Set());
 
@@ -325,12 +329,12 @@ export function SkillsConstellation() {
                       onMouseEnter={() => handleSkillHover(skill.id)}
                       onMouseLeave={() => handleSkillHover(null)}
                     >
-                      {/* Glow circle (appears on hover) */}
+                      {/* Glow circle (appears on hover) - reduced if motion is preferred */}
                       {isHovered && (
                         <circle
                           r={style.radius + 15}
                           fill="url(#nodeGlow)"
-                          class="animate-pulse"
+                          class={prefersReducedMotion() ? "" : "animate-pulse"}
                         />
                       )}
 

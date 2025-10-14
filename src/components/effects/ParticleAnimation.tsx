@@ -1,4 +1,5 @@
 import { onMount, onCleanup } from "solid-js";
+import { usePrefersReducedMotion } from "~/lib/usePrefersReducedMotion";
 
 /**
  * 🎨 PARTICLE ANIMATION COMPONENT
@@ -9,6 +10,7 @@ import { onMount, onCleanup } from "solid-js";
  * 3. Mouse tracking - Interactive experiences
  * 4. Particle systems - Creating organic movement
  * 5. Performance optimization - Efficient rendering
+ * 6. Accessibility - Respecting prefers-reduced-motion
  */
 
 interface Particle {
@@ -22,6 +24,8 @@ interface Particle {
 }
 
 export function ParticleAnimation() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  
   let canvasRef: HTMLCanvasElement | undefined;
   let particles: Particle[] = [];
   let mouseX = 0;
@@ -182,6 +186,28 @@ export function ParticleAnimation() {
    * Sets up canvas and starts animation when component mounts
    */
   onMount(() => {
+    // Skip animation if user prefers reduced motion
+    if (prefersReducedMotion()) {
+      // Show static particles instead
+      handleResize();
+      const canvas = canvasRef;
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          // Draw static particles (no animation)
+          ctx.fillStyle = 'rgba(17, 24, 39, 1)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          particles.forEach((particle) => {
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fillStyle = particle.color;
+            ctx.fill();
+          });
+        }
+      }
+      return; // Exit early, no animation
+    }
+
     handleResize();
     animate();
 
