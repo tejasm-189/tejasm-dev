@@ -4,3 +4,4 @@ export { GlassCard } from "./GlassCard";
 export { ParticleAnimation } from "./ParticleAnimation";
 export { ScrollTypography } from "./ScrollTypography";
 export { SkillsConstellation } from "./SkillsConstellation";
+export { CustomCursor } from "./CustomCursor";
