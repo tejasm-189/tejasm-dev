@@ -261,6 +261,7 @@ Create an extended, immersive home page that showcases exceptional UI/UX skills 
 - **GSAP ScrollTrigger**: Powerful scroll-based animations
 - **Locomotive Scroll**: Smooth scrolling library
 - **AOS (Animate On Scroll)**: Simple scroll animations
+- **Parallax and Motion FX**: Background Video/Image movement with scroll
 
 ### Typography
 - **Splitting.js**: Character/word splitting for text animations
