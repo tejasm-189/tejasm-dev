@@ -8,6 +8,7 @@ import { Reveal } from "~/components/effects/Reveal";
 import { GlassCard } from "~/components/effects/GlassCard";
 import { ParticleAnimation } from "~/components/effects/ParticleAnimation";
 import { ScrollTypography } from "~/components/effects/ScrollTypography";
+import { SkillsConstellation } from "~/components/effects/SkillsConstellation";
 
 export default function Home() {
   return (
@@ -33,6 +34,9 @@ export default function Home() {
           subtitle="Combining cutting-edge technology with thoughtful design to create memorable user experiences that stand the test of time."
           animationType="slide"
         />
+
+        {/* Animated Skills Constellation - Section 7 from HOME_PAGE_VISION.md */}
+        <SkillsConstellation />
 
         <Container>
           {/* Recent Posts Preview */}
