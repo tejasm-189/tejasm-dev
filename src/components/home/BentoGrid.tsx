@@ -27,7 +27,7 @@ interface BentoItem {
   metric?: string; // Achievement metric (e.g., "60fps", "100% Uptime")
 }
 
-export function BentoGrid() {
+export default function BentoGrid() {
   // Check if user prefers reduced motion
   const prefersReducedMotion = usePrefersReducedMotion();
 

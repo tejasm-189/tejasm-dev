@@ -44,7 +44,7 @@ interface Connection {
   to: Skill;
 }
 
-export function SkillsConstellation() {
+export default function SkillsConstellation() {
   // Check if user prefers reduced motion
   const prefersReducedMotion = usePrefersReducedMotion();
 

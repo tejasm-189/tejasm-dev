@@ -1,6 +1,4 @@
 import { onMount, onCleanup, createSignal } from "solid-js";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePrefersReducedMotion } from "~/lib/usePrefersReducedMotion";
 
 /**
@@ -37,7 +35,12 @@ import { usePrefersReducedMotion } from "~/lib/usePrefersReducedMotion";
 // Register ScrollTrigger plugin with GSAP
 // This must be done before using ScrollTrigger features
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
+  // Lazy load GSAP and register plugin
+  import("gsap").then(({ default: gsap }) => {
+    import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+      gsap.registerPlugin(ScrollTrigger);
+    });
+  });
 }
 
 interface ScrollTypographyProps {
@@ -46,7 +49,7 @@ interface ScrollTypographyProps {
   animationType?: "fade" | "slide" | "scale" | "rotate";
 }
 
-export function ScrollTypography(props: ScrollTypographyProps) {
+export default function ScrollTypography(props: ScrollTypographyProps) {
   let containerRef: HTMLDivElement | undefined;
   let textRef: HTMLHeadingElement | undefined;
   let subtitleRef: HTMLParagraphElement | undefined;
@@ -101,7 +104,7 @@ export function ScrollTypography(props: ScrollTypographyProps) {
     return element.children; // Return all span elements
   };
 
-  onMount(() => {
+  onMount(async () => {
     if (!textRef) return;
 
     // If user prefers reduced motion, skip all animations and show text immediately
@@ -111,6 +114,11 @@ export function ScrollTypography(props: ScrollTypographyProps) {
       if (subtitleRef && props.subtitle) subtitleRef.style.opacity = "1";
       return;
     }
+
+    // Lazy load GSAP and ScrollTrigger
+    const { default: gsap } = await import("gsap");
+    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+    gsap.registerPlugin(ScrollTrigger);
 
     // Split text into animatable characters
     const chars = splitTextIntoChars(textRef);

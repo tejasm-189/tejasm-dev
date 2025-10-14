@@ -8,6 +8,8 @@ export default createHandler(() => (
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>Tejas M - Full Stack Developer & UI/UX Designer</title>
+          <meta name="description" content="Portfolio of Tejas M, a passionate full-stack developer and UI/UX designer specializing in modern web technologies, React, SolidJS, and award-winning user experiences." />
           <link rel="icon" href="/favicon.ico" />
           {assets}
         </head>

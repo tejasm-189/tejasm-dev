@@ -18,10 +18,10 @@ export function Footer() {
           <div>
             <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
             <div class="flex flex-col gap-2">
-              <a href="/" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Home</a>
-              <a href="/blog" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Blog</a>
-              <a href="/about" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">About</a>
-              <a href="/projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Projects</a>
+              <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">Home</a>
+              <a href="/blog" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">Blog</a>
+              <a href="/about" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">About</a>
+              <a href="/projects" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">Projects</a>
             </div>
           </div>
 
@@ -33,8 +33,8 @@ export function Footer() {
                 href={siteConfig.links.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="text-2xl text-gray-600 dark:text-gray-400 hover:text-blue-600"
-                aria-label="GitHub"
+                class="text-2xl text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors"
+                aria-label="Visit my GitHub profile"
               >
                 <div class="i-mdi-github" />
               </a>
@@ -42,8 +42,8 @@ export function Footer() {
                 href={siteConfig.links.linkedin} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="text-2xl text-gray-600 dark:text-gray-400 hover:text-blue-600"
-                aria-label="LinkedIn"
+                class="text-2xl text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors"
+                aria-label="Connect with me on LinkedIn"
               >
                 <div class="i-mdi-linkedin" />
               </a>

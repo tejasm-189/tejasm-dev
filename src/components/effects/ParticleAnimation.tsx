@@ -23,7 +23,7 @@ interface Particle {
   opacity: number;
 }
 
-export function ParticleAnimation() {
+export default function ParticleAnimation() {
   const prefersReducedMotion = usePrefersReducedMotion();
   
   let canvasRef: HTMLCanvasElement | undefined;
