@@ -1,7 +1,7 @@
 export { BackgroundEffects } from "./BackgroundEffects";
 export { Reveal } from "./Reveal";
 export { GlassCard } from "./GlassCard";
-export { ParticleAnimation } from "./ParticleAnimation";
-export { ScrollTypography } from "./ScrollTypography";
-export { SkillsConstellation } from "./SkillsConstellation";
+export { default as ParticleAnimation } from "./ParticleAnimation";
+export { default as ScrollTypography } from "./ScrollTypography";
+export { default as SkillsConstellation } from "./SkillsConstellation";
 export { CustomCursor } from "./CustomCursor";
