@@ -170,7 +170,7 @@ Create an extended, immersive home page that showcases exceptional UI/UX skills 
 - **Concept**: Strong, compelling CTA before footer
 - **Features**:
   - Large, bold text
-  - Multiple CTAs (Contact, LinkedIn, GitHub, Resume)
+  - Multiple CTAs (Contact, LinkedIn, GitHub)
   - Animated gradient background
   - Buttons with impressive hover effects
   - Optional: Contact form with animations
