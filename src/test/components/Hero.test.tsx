@@ -46,13 +46,11 @@ describe('Hero Component', () => {
   it('should render all CTA buttons with correct text', () => {
     render(() => <Hero />);
     
-    // Check for the three main call-to-action buttons
+    // Check for the main call-to-action buttons
     const blogButton = screen.getByRole('link', { name: /Read My Blog/i });
-    const resumeButton = screen.getByRole('link', { name: /Download Resume/i });
     const aboutButton = screen.getByRole('link', { name: /About Me/i });
     
     expect(blogButton).toBeInTheDocument();
-    expect(resumeButton).toBeInTheDocument();
     expect(aboutButton).toBeInTheDocument();
   });
 
@@ -64,15 +62,6 @@ describe('Hero Component', () => {
     
     expect(blogButton).toHaveAttribute('href', '/blog');
     expect(aboutButton).toHaveAttribute('href', '/about');
-  });
-
-  it('should render resume download link with correct attributes', () => {
-    render(() => <Hero />);
-    
-    const resumeButton = screen.getByRole('link', { name: /Download Resume/i });
-    
-    expect(resumeButton).toHaveAttribute('href', '/documents/Tejas Resume.pdf');
-    expect(resumeButton).toHaveAttribute('download', 'Tejas_M_Resume.pdf');
   });
 
   // Note: Social media links have been moved to the About page

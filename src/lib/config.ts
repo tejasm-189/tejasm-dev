@@ -12,8 +12,7 @@ export const siteConfig = {
     github: "https://github.com/tejasm-189",
     linkedin: "https://www.linkedin.com/in/tejas-m-65656b281/",
     twitter: "https://x.com/cipherworld4us",
-    threads: "https://www.threads.net/@tejasm.11",
-    resume: "/documents/Tejas Resume.pdf"
+    threads: "https://www.threads.net/@tejasm.11"
   },
   calendar: {
     display: true,

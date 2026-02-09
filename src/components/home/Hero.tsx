@@ -50,15 +50,6 @@ export function Hero() {
               <span class="relative z-10">Read My Blog</span>
             </a>
             <a 
-              href={siteConfig.links.resume}
-              download="Tejas_M_Resume.pdf"
-              class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 ease-out bg-gradient-to-r from-green-600 to-teal-600 rounded-xl shadow-lg hover:shadow-2xl hover:shadow-green-500/50 dark:hover:shadow-green-500/30 transform hover:scale-105 hover:-translate-y-1 active:scale-95 overflow-hidden"
-            >
-              <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-teal-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div class="i-mdi-download inline-block mr-2 text-xl relative z-10 group-hover:animate-bounce" />
-              <span class="relative z-10">Download Resume</span>
-            </a>
-            <a 
               href="/about" 
               class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 dark:text-gray-200 transition-all duration-300 ease-out bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-xl shadow-lg hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-400 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
             >

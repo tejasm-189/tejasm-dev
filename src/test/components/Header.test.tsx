@@ -187,16 +187,6 @@ describe('Header Component', () => {
     });
   });
 
-  describe('Resume Link', () => {
-    it('should have correct download attributes', () => {
-      renderWithRouter(Header);
-      
-      // The new header doesn't have a resume link - it's in the Hero section
-      // Just verify navigation works
-      expect(screen.getByText(/Home/i)).toBeInTheDocument();
-    });
-  });
-
   describe('Accessibility', () => {
     it('should have proper ARIA labels for interactive elements', () => {
       renderWithRouter(Header);
