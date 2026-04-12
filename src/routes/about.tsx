@@ -21,10 +21,13 @@ export default function About() {
                 <div class="relative group">
                   <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
                   <div class="relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
-                    <img 
-                      src="/images/tejas.jpg" 
-                      alt="Tejas M" 
+                    <img
+                      src="/images/tejas.jpg"
+                      alt="Tejas M"
+                      width="809"
+                      height="1037"
                       class="w-full h-full object-cover"
+                      decoding="async"
                     />
                   </div>
                 </div>

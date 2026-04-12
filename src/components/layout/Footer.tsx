@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { Container } from "./Container";
 import { siteConfig } from "~/lib/config";
 
@@ -18,10 +19,10 @@ export function Footer() {
           <div>
             <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
             <div class="flex flex-col gap-2">
-              <a href="/" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Home</a>
-              <a href="/blog" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Blog</a>
-              <a href="/about" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">About</a>
-              <a href="/projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Projects</a>
+              <A href="/" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Home</A>
+              <A href="/blog" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Blog</A>
+              <A href="/about" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">About</A>
+              <A href="/projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-600">Projects</A>
             </div>
           </div>
 

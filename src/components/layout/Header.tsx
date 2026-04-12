@@ -1,10 +1,11 @@
-import { createSignal, onMount, Show } from "solid-js";
+import { createSignal, onMount, onCleanup, Show } from "solid-js";
 import { A, useLocation } from "@solidjs/router";
 import { siteConfig } from "~/lib/config";
 
 export function Header() {
   const [isDark, setIsDark] = createSignal(false);
   const [currentTime, setCurrentTime] = createSignal("");
+  const [isDesktop, setIsDesktop] = createSignal(false);
   const location = useLocation();
 
   // Check for saved theme preference or default to dark
@@ -12,29 +13,64 @@ export function Header() {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const shouldBeDark = savedTheme === "dark" || (!savedTheme && prefersDark);
-    
+
     setIsDark(shouldBeDark);
     if (shouldBeDark) {
       document.documentElement.classList.add("dark");
     }
 
-    // Update time every second
-    const updateTime = () => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Asia/Kolkata", // IST timezone
+    // Check if desktop (clock is only shown on lg screens)
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mediaQuery.matches);
+
+    const handleResize = () => setIsDesktop(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleResize);
+
+    // Update time every second - only on desktop
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    const startTimeUpdates = () => {
+      if (intervalId) return;
+
+      // Create formatter once - reuse every tick
+      const formatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Kolkata",
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
         hour12: false,
-      };
-      setCurrentTime(new Intl.DateTimeFormat("en-GB", options).format(now));
-    };
-    
-    updateTime();
-    const intervalId = setInterval(updateTime, 1000);
+      });
 
-    return () => clearInterval(intervalId);
+      const updateTime = () => setCurrentTime(formatter.format(new Date()));
+      updateTime();
+      intervalId = setInterval(updateTime, 1000);
+    };
+
+    const stopTimeUpdates = () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    // Only update time when on desktop
+    if (mediaQuery.matches) {
+      startTimeUpdates();
+    }
+
+    const resizeListener = () => {
+      if (mediaQuery.matches) {
+        startTimeUpdates();
+      } else {
+        stopTimeUpdates();
+      }
+    };
+    mediaQuery.addEventListener("change", resizeListener);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+      mediaQuery.removeEventListener("change", resizeListener);
+      stopTimeUpdates();
+    };
   });
 
   const toggleTheme = () => {

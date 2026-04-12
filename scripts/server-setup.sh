@@ -194,9 +194,16 @@ else
 server {
     listen 80;
     listen [::]:80;
-    
+
     server_name tejasm.dev www.tejasm.dev;  # Replace with your domain
-    
+
+    # Security Headers
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';" always;
+
     location / {
         proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
@@ -208,12 +215,45 @@ server {
         proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_cache_bypass \$http_upgrade;
     }
-    
+
     # Gzip compression
     gzip on;
     gzip_vary on;
-    gzip_min_length 1024;
-    gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml+rss application/json;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_min_length 256;
+    gzip_types
+        text/plain
+        text/css
+        text/xml
+        text/javascript
+        application/javascript
+        application/x-javascript
+        application/xml
+        application/xml+rss
+        application/json
+        image/svg+xml
+        font/woff2;
+
+    # Browser caching headers
+    location ~* \.(js|css)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        add_header X-Content-Type-Options "nosniff" always;
+    }
+
+    location ~* \.(png|jpg|jpeg|gif|ico|svg|webp|avif)$ {
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+        add_header X-Content-Type-Options "nosniff" always;
+    }
+
+    location ~* \.(woff|woff2|ttf|eot|otf)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        add_header Access-Control-Allow-Origin "*";
+        add_header X-Content-Type-Options "nosniff" always;
+    }
 }
 EOF
 fi

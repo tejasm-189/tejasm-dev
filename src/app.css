@@ -1,5 +1,5 @@
-/* Import Google Fonts for better typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Import Google Fonts - optimized with only necessary weights */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 /* Custom styles */
 * {
@@ -119,6 +119,18 @@ html.dark body {
 .animate-pulse-fast {
   animation: pulse-fast 12s ease-in-out infinite;
   animation-delay: 4s;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-slow,
+  .animate-pulse-medium,
+  .animate-pulse-fast,
+  .animate-gradient,
+  .animate-in {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* Typography Enhancements */
